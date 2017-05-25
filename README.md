@@ -35,10 +35,10 @@ $ ./todolist <command> -h
 ## Create new list
 
 To create a new list type
-**Note:** The title of the list can't contain any spaces!
 ```
 $ ./todolist newlist <title>
 ```
+**Note:** The title of the list can't contain any spaces!
 
 **Example**:
 ```
@@ -48,10 +48,10 @@ $ ./todolist newlist MyProject
 ## Add a new todo
 
 To add a new todo to a list type
-**Note:** The name of the todo can't contain any spaces!
 ```
 $ ./todolist addtodo <name> <list>
 ```
+**Note:** The name of the todo can't contain any spaces!
 
 **Example:**
 ```
