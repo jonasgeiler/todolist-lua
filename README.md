@@ -54,13 +54,12 @@ To add a new todo to a list type
 ```
 $ ./todolist addtodo <name> <list> [-n --notice] [-p --priority]
 ```
-**Note:** The name of the todo can't contain any spaces!
 
 **Optional parameters:**
-Use ``--notice <notice>`` (or ``-n <notice>``) to add a notice (details, informations, etc.) to the todo. 
+Use ``--notice <notice>`` (or ``-n <notice>``) to add a notice (details, informations, etc.) to the todo.<br>
 *Default: ""*
 
-Use ``--priority <priority>`` (or ``-p <priority>``) to set a priority for the todo. Must be in range 0-3!
+Use ``--priority <priority>`` (or ``-p <priority>``) to set a priority for the todo. Must be in range 0-3!<br>
 *Default: 0*
 
 **Note:** If the name or the notice contains spaces, you have to use double (or single) quotes. (See example)
