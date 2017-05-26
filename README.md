@@ -87,6 +87,9 @@ $ ./todolist open <todo> <list>
 **Example:**
 ```
 $ ./todolist done Fix-Bugs MyProject
+
+Oh wait... They aren't:
+$ ./todolist open Fix-Bugs MyProject
 ```
 
 ## Remove done todos
