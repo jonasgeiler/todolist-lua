@@ -134,7 +134,7 @@ elseif args.done then
 
 	-- if todo does not exist
 	if storage[args.list][args.todo] == nil then
-		done:error("No todo with name '"..args.todo.."'")
+		done:error("No todo with name '"..args.todo.."' in list '"..args.list.."'")
 	end
 
 	-- set state of todo as done
@@ -144,7 +144,7 @@ elseif args.done then
 elseif args.open then
 	-- if list does not exist
 	if storage[args.list] == nil then
-		open:error("No list with title '"..args.list.."'")
+		open:error("No list with title '"..args.list.."' in list '"..args.list.."'")
 	end
 
 	-- if todo does not exist
@@ -181,13 +181,48 @@ elseif args.list then
 		-- show all lists
 		print("-- All lists --")
 		for list,todos in pairs(storage) do
-			print("\n> "..list)
+			local todocount = 0
+			local highestprioritycount = 0
+
+			-- Count todos with high priority and count all todos
+			for todo,data in pairs(todos) do
+				if data.state == "open" then -- count only if state is open
+
+					if data.priority == 3 then -- if priority is 3 the todo has a high priority
+						highestprioritycount = highestprioritycount + 1
+					end
+
+					todocount = todocount + 1
+
+				end
+			end
+
+			print("\n> "..list.."\n   - Todos: "..todocount)
+			if highestprioritycount > 0 then print("   - Todos with high priority: "..highestprioritycount) end
 		end
 	else
-		-- show contents of given list (sorted by priority)
+		local donelist = {}
+		local openlist = {}
+
+		-- seperate done and open todos in seperate lists
+		for todo,data in pairs(storage[args.list]) do
+			if data.state == "done" then
+				donelist[todo] = data
+			elseif data.state == "open" then
+				openlist[todo] = data
+			end
+		end
+
+		-- show contents of given list (sorted by priority and state)
 		print("-- "..args.list.." --")
-		for todo,data in spairs(storage[args.list], function(t, a, b) return t[a].priority > t[b].priority end)do
+
+		for todo,data in spairs(openlist, function(t, a, b) return t[a].priority > t[b].priority end) do -- show open todos first
 			print("\n> "..todo.."\n   - State: "..data.state.."\n   - Priority: "..data.priority)
+			if data.notice ~= "" then print("   - Notice: "..data.notice) end
+		end
+
+		for todo,data in spairs(donelist, function(t, a, b) return t[a].priority > t[b].priority end) do -- then show done todos
+			print("\n< "..todo.."\n   - State: "..data.state.."\n   - Priority: "..data.priority)
 			if data.notice ~= "" then print("   - Notice: "..data.notice) end
 		end
 	end

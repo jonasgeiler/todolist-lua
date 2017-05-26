@@ -35,27 +35,41 @@ $ ./todolist <command> -h
 ## Create new list
 
 To create a new list type
-**Note:** The title of the list can't contain any spaces!
 ```
 $ ./todolist newlist <title>
 ```
+**Note:** If the name contains spaces, you have to use double (or single) quotes. (See Example)
 
 **Example**:
 ```
 $ ./todolist newlist MyProject
+
+Or with spaces:
+$ ./todolist newlist "My Project"
 ```
 
 ## Add a new todo
 
 To add a new todo to a list type
-**Note:** The name of the todo can't contain any spaces!
 ```
-$ ./todolist addtodo <name> <list>
+$ ./todolist addtodo <name> <list> [-n --notice] [-p --priority]
 ```
+
+**Optional parameters:**
+Use ``--notice <notice>`` (or ``-n <notice>``) to add a notice (details, informations, etc.) to the todo. 
+*Default: ""*
+
+Use ``--priority <priority>`` (or ``-p <priority>``) to set a priority for the todo. Must be in range 0-3!
+*Default: 0*
+
+**Note:** If the name or the notice contains spaces, you have to use double (or single) quotes. (See example)
 
 **Example:**
 ```
-$ ./todolist addtodo Fix-Bugs MyProject
+$ ./todolist addtodo Fix-Bugs MyProject -n Issue#123 -p 2
+
+Or with spaces:
+$ ./todolist addtodo "Fix Bugs" "My Project" -n "See Issue #123" -p 2
 ```
 
 ## Set todo as done/open
