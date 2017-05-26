@@ -54,6 +54,7 @@ To add a new todo to a list type
 ```
 $ ./todolist addtodo <name> <list> [-n --notice] [-p --priority]
 ```
+**Note:** The name of the todo can't contain any spaces!
 
 **Optional parameters:**
 Use ``--notice <notice>`` (or ``-n <notice>``) to add a notice (details, informations, etc.) to the todo. 
