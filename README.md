@@ -1,8 +1,8 @@
 # todolist-lua
 A simple todolist for the command line written in Lua.
 
-This is a rework of a very old project of mine, which was actually the second 
-project I ever uploaded to GitHub!  
+This is a rework of a very old project of mine, which was actually one of the
+first projects I ever uploaded to GitHub!  
 If you want to see the old version, check out the 
 [`old-version`](https://github.com/skayo/todolist-lua/tree/old-version)
 tag.  
