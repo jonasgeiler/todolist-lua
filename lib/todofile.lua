@@ -97,21 +97,8 @@ end
 ---@param text string
 ---@param checked boolean?
 function todofile:add_todo(text, checked)
-	local next_index = #self.todos + 1
-	if table.maxn then
-		next_index = table.maxn(self.todos) + 1
-	else
-		--table.maxn was removed in Lua 5.2+
-		local max_index = 1
-		for index in pairs(self.todos) do
-			if index > max_index then
-				max_index = index
-			end
-		end
-		next_index = max_index + 1
-	end
-
-	self.todos[next_index] = todo(text, checked)
+	self.todos[utils.table_max(self.todos) + 1] =
+		todo(text, checked)
 
 	if not self.transaction then
 		self:save()
