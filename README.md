@@ -23,9 +23,9 @@ $ luarocks install
 
 $ ./todo list ./todolist.md
 1. [X] Start reworking todolist-lua
-1. [ ] Finish reworking todolist-lua
-2. [ ] Write documentation
-3. [ ] Write tests
+2. [ ] Finish reworking todolist-lua
+3. [ ] Write documentation
+4. [ ] Write tests
 ```
 
 ## About Todofiles
