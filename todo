@@ -1,0 +1,25 @@
+#!/usr/bin/env lua
+
+local todofile = require('lib.todofile')
+
+local path = './todo.md'
+local tf = todofile(path)
+
+print()
+print(
+	'Showing '
+	.. path
+	.. ' - '
+	.. tf:count_todos()
+	.. ' todos ('
+	.. tf:count_unchecked_todos()
+	.. ' open, '
+	.. tf:count_checked_todos()
+	.. ' closed)'
+)
+for k, v in pairs(tf:get_todos()) do
+	print(k, v)
+end
+print()
+
+tf:add_todo('Test ' .. (tf:count_todos() + 1))
