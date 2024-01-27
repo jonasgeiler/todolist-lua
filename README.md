@@ -1,4 +1,4 @@
-# todolist-lua
+# todolist-lua (WIP)
 A simple todolist for the command line written in Lua.
 
 This is a rework of a very old project of mine, which was actually one of the
