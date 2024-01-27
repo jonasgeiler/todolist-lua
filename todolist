@@ -1,0 +1,116 @@
+#!/usr/bin/env lua
+
+local todofile = require('lib.todofile')
+
+local script = tostring(arg[0])
+local cli = {
+	description = 'A simple todolist for the command line',
+	usage = script .. ' <command> [flags]',
+	commands = {
+		{
+			names = { 'add', 'a' },
+			description = 'Add a new todo to a todofile',
+			flags = {
+				{
+					names = { '-c', '--checked' },
+					description = 'Add the todo in a checked state',
+				},
+			},
+		},
+	},
+	flags = {
+		{
+			names = { '--help', '-h' },
+			description = 'Show help',
+		},
+		{
+			names = { '--version', '-v' },
+			description = 'Show version',
+		},
+	},
+	examples = {
+		'$ ' .. script .. ' add ./todo.md "Do the dishes"',
+		'$ ' .. script .. ' rename ./todos.md 1 "Do the dishes tomorrow"',
+		'$ ' .. script .. ' check ./todo.md 1',
+		'$ ' .. script .. ' remove ./todos.md 1',
+	},
+	learn_more = {
+		'Run "' .. script .. ' <command> --help" for more information on a command.',
+		'For bugs and questions, head to https://github.com/jonasgeiler/todolist-lua',
+	},
+}
+
+local max_padding = 0
+for _, command in pairs(cli.commands) do
+	local padding = #table.concat(command.names, ', ')
+	if padding > max_padding then
+		max_padding = padding
+	end
+end
+for _, flag in pairs(cli.flags) do
+	local padding = #table.concat(flag.names, ', ')
+	if padding > max_padding then
+		max_padding = padding
+	end
+end
+
+print(cli.description)
+print()
+print('USAGE')
+print('  ' .. cli.usage)
+print()
+print('COMMANDS')
+for _, command in pairs(cli.commands) do
+	local names_str = table.concat(command.names, ', ')
+	print(
+		'  '
+		.. names_str
+		.. string.rep(' ', max_padding - #names_str)
+		.. '  '
+		.. command.description
+	)
+end
+print()
+print('FLAGS')
+for _, flag in pairs(cli.flags) do
+	local names_str = table.concat(flag.names, ', ')
+	print(
+		'  '
+		.. names_str
+		.. string.rep(' ', max_padding - #names_str)
+		.. '  '
+		.. flag.description
+	)
+end
+print()
+print('EXAMPLES')
+for _, example in pairs(cli.examples) do
+	print('  ' .. example)
+end
+print()
+print('LEARN MORE')
+for _, info in pairs(cli.learn_more) do
+	print('  ' .. info)
+end
+print()
+
+--TODO: CLI
+-- todolist add ./todo.md 'Do the dishes'
+-- todolist check ./todo.md 'Do the dishes'
+-- todolist check ./todo.md 1
+-- todolist uncheck ./todo.md 'Do the dishes'
+-- todolist uncheck ./todo.md 1
+-- todolist list ./todo.md
+-- todolist list ./todo.md --checked
+-- todolist list ./todo.md --unchecked
+-- todolist list ./todo.md --quiet   # only shows the list without the fancy stuff
+-- todolist get ./todo.md 'Do the dishes'
+-- todolist get ./todo.md 1
+-- todolist update ./todo.md 'Do the dishes' 'Do the dishes tomorrow'
+-- todolist update ./todo.md 1 'Do the dishes tomorrow'
+-- todolist remove ./todo.md 'Do the dishes'
+-- todolist remove ./todo.md 1
+-- todolist remove-checked ./todo.md  # no shorthand for this one since destructive
+--
+-- Also provide shorthands for the commands above!
+-- Also maybe allow the legacy commands for "backwards compatibility"
