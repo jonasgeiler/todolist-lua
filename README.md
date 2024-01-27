@@ -15,7 +15,7 @@ But be warned of the bad code :D
 > if you have any questions!
 
 ## Requirements
-- Lua(JIT) == 5.1 (newer versions might work but not tested)
+- LuaJIT 2.1 or Lua 5.1 (newer versions might work but not tested)
 
 ## Usage
 ```bash
