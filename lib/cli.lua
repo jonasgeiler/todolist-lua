@@ -87,11 +87,12 @@ list_cmd:action(function(args)
 	local tf = todofile(args.todofile_path)
 
 	if not args.quiet then
+		local todos_count = tf:count_todos()
 		local header = 'Todolist "'
 			.. args.todofile_path
 			.. '" - '
-			.. tf:count_todos()
-			.. ' todos ('
+			.. todos_count
+			.. (todos_count == 1 and ' todo (' or ' todos (')
 			.. tf:count_unchecked_todos()
 			.. ' unchecked, '
 			.. tf:count_checked_todos()
