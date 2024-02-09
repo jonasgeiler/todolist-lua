@@ -1,2 +1,2 @@
 @echo off
-luajit .\todolist %*
+lua .\todolist %*
