@@ -80,18 +80,6 @@ function todofile:load()
 	file:close()
 end
 
----Move the todofile
----@param new_path string New path of the todofile
-function todofile:move(new_path)
-	os.rename(self.path, new_path)
-	self.path = new_path
-end
-
----Remove the todofile
-function todofile:delete()
-	os.remove(self.path)
-end
-
 ---Add a new todo
 ---@param text string
 ---@param checked boolean?
