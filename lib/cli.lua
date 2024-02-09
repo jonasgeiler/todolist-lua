@@ -1,3 +1,8 @@
+local tonumber = tonumber
+local type = type
+local math = math
+local print = print
+local pairs = pairs
 local argparse = require('lib.vendor.argparse')
 local todofile = require('lib.todofile')
 
