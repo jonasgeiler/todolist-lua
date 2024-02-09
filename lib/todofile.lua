@@ -10,7 +10,6 @@ local class = require('lib.class')
 local utils = require('lib.utils')
 local todo = require('lib.todo')
 
-
 local TYPE_STRING = 'string'
 local TODO_LINE_PATTERN = '^%s*(%d-)%.%s*%[([ Xx])%]%s*(.-)%s*$'
 

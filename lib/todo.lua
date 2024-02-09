@@ -1,7 +1,6 @@
 local tostring = tostring
 local class = require('lib.class')
 
-
 ---Represents a todo item
 ---@class todo
 ---@overload fun(text: string, checked: boolean?): todo
