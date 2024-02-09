@@ -2,10 +2,9 @@
 
 local todofile = require('lib.todofile')
 
-local script = tostring(arg[0])
-local cli = {
+local SCRIPT = tostring(arg[0])
+local CLI = {
 	description = 'A simple todolist for the command line',
-	usage = script .. ' <command> [flags]',
 	commands = {
 		{
 			names = { 'add', 'a' },
@@ -15,6 +14,14 @@ local cli = {
 					names = { '-c', '--checked' },
 					description = 'Add the todo in a checked state',
 				},
+				{
+					names = { '--help', '-h' },
+					description = 'Show help for command',
+				},
+			},
+			examples = {
+				'$ ' .. SCRIPT .. ' add ./todo.md "Do the dishes"',
+				'$ ' .. SCRIPT .. ' add ./todo.md "Clean up" --checked',
 			},
 		},
 	},
@@ -29,38 +36,38 @@ local cli = {
 		},
 	},
 	examples = {
-		'$ ' .. script .. ' add ./todo.md "Do the dishes"',
-		'$ ' .. script .. ' rename ./todos.md 1 "Do the dishes tomorrow"',
-		'$ ' .. script .. ' check ./todo.md 1',
-		'$ ' .. script .. ' remove ./todos.md 1',
+		'$ ' .. SCRIPT .. ' add ./todo.md "Do the dishes"',
+		'$ ' .. SCRIPT .. ' rename ./todos.md 1 "Do the dishes tomorrow"',
+		'$ ' .. SCRIPT .. ' check ./todo.md 1',
+		'$ ' .. SCRIPT .. ' remove ./todos.md 1',
 	},
 	learn_more = {
-		'Run "' .. script .. ' <command> --help" for more information on a command.',
+		'Run "' .. SCRIPT .. ' <command> --help" for more information on a command.',
 		'For bugs and questions, head to https://github.com/jonasgeiler/todolist-lua',
 	},
 }
 
 local max_padding = 0
-for _, command in pairs(cli.commands) do
+for _, command in pairs(CLI.commands) do
 	local padding = #table.concat(command.names, ', ')
 	if padding > max_padding then
 		max_padding = padding
 	end
 end
-for _, flag in pairs(cli.flags) do
+for _, flag in pairs(CLI.flags) do
 	local padding = #table.concat(flag.names, ', ')
 	if padding > max_padding then
 		max_padding = padding
 	end
 end
 
-print(cli.description)
+print(CLI.description)
 print()
 print('USAGE')
-print('  ' .. cli.usage)
+print('  ' .. SCRIPT .. ' <command> [flags]')
 print()
 print('COMMANDS')
-for _, command in pairs(cli.commands) do
+for _, command in pairs(CLI.commands) do
 	local names_str = table.concat(command.names, ', ')
 	print(
 		'  '
@@ -72,7 +79,7 @@ for _, command in pairs(cli.commands) do
 end
 print()
 print('FLAGS')
-for _, flag in pairs(cli.flags) do
+for _, flag in pairs(CLI.flags) do
 	local names_str = table.concat(flag.names, ', ')
 	print(
 		'  '
@@ -84,12 +91,12 @@ for _, flag in pairs(cli.flags) do
 end
 print()
 print('EXAMPLES')
-for _, example in pairs(cli.examples) do
+for _, example in pairs(CLI.examples) do
 	print('  ' .. example)
 end
 print()
 print('LEARN MORE')
-for _, info in pairs(cli.learn_more) do
+for _, info in pairs(CLI.learn_more) do
 	print('  ' .. info)
 end
 print()
