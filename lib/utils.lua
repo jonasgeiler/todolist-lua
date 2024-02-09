@@ -16,7 +16,7 @@ end
 ---Returns the largest positive numerical index of the given table,
 ---or zero if the table has no positive numerical indices
 ---@param tbl any[]
----@return integer
+---@return number
 function utils.table_max(tbl)
 	if table.maxn then
 		return table.maxn(tbl)

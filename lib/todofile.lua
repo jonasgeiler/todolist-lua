@@ -183,8 +183,8 @@ function todofile:count_unchecked_todos()
 end
 
 ---Get a specific todo by index or text
----@param index_or_text integer|string Index or text of the todo
----@return todo,integer todo_and_index The todo and the index of the todo
+---@param index_or_text number|string Index or text of the todo
+---@return todo,number todo_and_index The todo and the index of the todo
 ---@nodiscard
 function todofile:get_todo(index_or_text)
 	--if index was passed, return directly
@@ -199,7 +199,7 @@ function todofile:get_todo(index_or_text)
 
 	--if text was passed, try to find todo by text
 	local found_todo ---@type todo?
-	local found_todo_index ---@type integer?
+	local found_todo_index ---@type number?
 	for index, curr_todo in pairs(self.todos) do
 		if string.lower(curr_todo.text) == string.lower(index_or_text) then
 			if found_todo then
@@ -218,7 +218,7 @@ function todofile:get_todo(index_or_text)
 end
 
 ---Set the text of a todo specified by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 ---@param new_text string New text of the todo
 function todofile:update_todo_text(index_or_text, new_text)
 	local found_todo = self:get_todo(index_or_text)
@@ -230,7 +230,7 @@ function todofile:update_todo_text(index_or_text, new_text)
 end
 
 ---Set the checked state of a todo specified by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 ---@param new_checked boolean New checked state of the todo
 function todofile:update_todo_checked(index_or_text, new_checked)
 	local found_todo = self:get_todo(index_or_text)
@@ -242,7 +242,7 @@ function todofile:update_todo_checked(index_or_text, new_checked)
 end
 
 ---Set the text and checked state of a todo specified by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 ---@param new_text string New text of the todo
 ---@param new_checked boolean New checked state of the todo
 function todofile:update_todo_text_and_checked(index_or_text, new_text, new_checked)
@@ -258,19 +258,19 @@ function todofile:update_todo_text_and_checked(index_or_text, new_text, new_chec
 end
 
 ---Check a todo specified by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 function todofile:check_todo(index_or_text)
 	self:update_todo_checked(index_or_text, true)
 end
 
 ---Uncheck a todo specified by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 function todofile:uncheck_todo(index_or_text)
 	self:update_todo_checked(index_or_text, false)
 end
 
 ---Remove a specific todo by index or text
----@param index_or_text integer|string Index or text of the todo
+---@param index_or_text number|string Index or text of the todo
 function todofile:remove_todo(index_or_text)
 	if type(index_or_text) == 'number' then
 		--if index was passed, remove directly
