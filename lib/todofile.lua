@@ -184,14 +184,14 @@ end
 
 ---Get a specific todo by index or text
 ---@param index_or_text integer|string Index or text of the todo
----@return todo todo The todo
+---@return todo,integer todo_and_index The todo and the index of the todo
 ---@nodiscard
 function todofile:get_todo(index_or_text)
 	--if index was passed, return directly
 	if type(index_or_text) == 'number' then
 		local found_todo = self.todos[index_or_text]
 		if found_todo then
-			return found_todo
+			return found_todo, index_or_text
 		else
 			error('Todo not found')
 		end
@@ -199,20 +199,22 @@ function todofile:get_todo(index_or_text)
 
 	--if text was passed, try to find todo by text
 	local found_todo ---@type todo?
-	for _, curr_todo in pairs(self.todos) do
-		if curr_todo.text == index_or_text then
+	local found_todo_index ---@type integer?
+	for index, curr_todo in pairs(self.todos) do
+		if string.lower(curr_todo.text) == string.lower(index_or_text) then
 			if found_todo then
 				error('Multiple todos with given text found - please use index')
 			end
 
 			found_todo = curr_todo
+			found_todo_index = index
 		end
 	end
-	if not found_todo then
+	if not found_todo or not found_todo_index then
 		error('Todo not found')
 	end
 
-	return found_todo
+	return found_todo, found_todo_index
 end
 
 ---Set the text of a todo specified by index or text
@@ -233,6 +235,22 @@ end
 function todofile:update_todo_checked(index_or_text, new_checked)
 	local found_todo = self:get_todo(index_or_text)
 	found_todo.checked = new_checked
+
+	if not self.transaction then
+		self:save()
+	end
+end
+
+---Set the text and checked state of a todo specified by index or text
+---@param index_or_text integer|string Index or text of the todo
+---@param new_text string New text of the todo
+---@param new_checked boolean New checked state of the todo
+function todofile:update_todo_text_and_checked(index_or_text, new_text, new_checked)
+	local old_transaction = self.transaction
+	self.transaction = true
+	self:update_todo_text(index_or_text, new_text)
+	self:update_todo_checked(index_or_text, new_checked)
+	self.transaction = old_transaction
 
 	if not self.transaction then
 		self:save()

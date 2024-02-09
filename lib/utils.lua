@@ -1,6 +1,7 @@
 local string = string
-local utils = {}
 
+---Common utilities
+local utils = {}
 
 local LINE_TRIM_PATTERN = '^%s*(.-)%s*$'
 
