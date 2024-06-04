@@ -1,1 +1,13 @@
+# Git ignore file
+# See: https://git-scm.com/docs/gitignore
+
+# OS
+.DS_Store
+
+# IDE
 .idea
+.vscode
+!/.vscode/extensions.json
+
+# Temp Files
+test.lua
