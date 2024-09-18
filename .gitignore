@@ -5,9 +5,20 @@
 .DS_Store
 
 # IDE
-.idea
-.vscode
+.idea/
+.vscode/
 !/.vscode/extensions.json
 
-# Temp Files
-test.lua
+# Temporary Files
+/test.lua
+
+# LuaRocks
+/luarocks/
+/lua/
+/lua_modules/
+/.luarocks/
+*.src.rock
+*.zip
+*.tar.gz
+*.rockspec
+luarocks.lock
